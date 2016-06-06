@@ -1,0 +1,133 @@
+	1/	 		code: 	response.resert();
+		 exception:		java.lang.IllegalStateException:getWriter() has already been called for this response;
+		 
+	2/			 return语句执行后，会检查有没有finally语句，有的话就执行，没有的话就退栈返回。
+					 return 基本类型时，会存放在临时变量里。
+					 
+  3/  js
+  		1、constructor是构造函数prototype(原型属性中的属性)，他指的是构造函数本身。
+
+		  2、__proto__指的是对象的原型对象，但是__proto__是一个非标准属性。
+			
+		  3、prototype是构造函数的原型属性;也就是我们常说的原型
+		  
+		  4/每个对象有一个constructor属性，指的是这个对象的构造函数。
+
+			5/当对象没有constructor这个属性时他通过__proto__来继承构造函数中的constructor的属性。
+			
+			6/每个函数都有prototype(原型属性)；每个对象有一个__proto__(原型对象)
+			
+			7/函数都继承于Function函数，对象都继承于Object对象，
+			
+			8/函数Function也是对象Object，Object也有自己的构造函数Function，所以Function和Object是互相创造的，
+			这在原型中是一个无法解释的特例、就好像先有鸡还是先有蛋。
+			
+			9/闭包下常用的this作用域解决方案：var that = this; or var self = this;  call or bind (bind有IE版本低时兼容性问题)
+			
+	 4/ 解决ide 打开jsp慢的问题。
+	 		解决方法：
+	 						将项目.project 中的<nature>org.eclipse.wst.jsdt.core.jsNature</nature> 这一行删除.
+	 						
+	 5/ 
+	 		new String("abc");从字节码上主要有两步，一是new在堆中分配一个String类型的空间，二将"abc"字面量赋于刚刚分配的String空间上（可以查看String的构造函数，内部又是一个引用），所以虽然没有再产一个abc的内存空间，但是还是有产生一个String类型实例的空间，只是内容指向同一个。所以用==的情况str3和str4是true，str4和str5是false，从创建的实例个数在有str3的情况下执行str5是新增一个，在没有str3和str4的情况下，执行str5是两个。
+	 		
+	 6/
+	 		select count(0) from dual;  //   =1   为0也计算    null与'' 不计算
+	 		
+	 		
+	 7/
+	 		导致OutOfMemoryError异常的常见原因有以下几种：
+
+		    1.内存中加载的数据量过于庞大，如一次从数据库取出过多数据；
+		    2.集合类中有对对象的引用，使用完后未清空，使得JVM不能回收；
+		    3.代码中存在死循环或循环产生过多重复的对象实体；
+		    4.使用的第三方软件中的BUG；
+		    5.启动参数内存值设定的过小；
+
+			此错误常见的错误提示：
+
+		    1.tomcat:java.lang.OutOfMemoryError: PermGen space
+		    2.tomcat:java.lang.OutOfMemoryError: Java heap space
+		    3.weblogic:Root cause of ServletException java.lang.OutOfMemoryError
+		    4.resin:java.lang.OutOfMemoryError
+		    5.java:java.lang.OutOfMemoryError
+
+		8/  nio:
+		
+				Channel 通道
+				Buffer 缓冲区
+				Selector 选择器
+				
+				其中Channel对应以前的流，Buffer不是什么新东西，Selector是因为nio可以使用异步的非堵塞模式才加入的东西。
+				
+				以前的流总是堵塞的，一个线程只要对它进行操作，其它操作就会被堵塞，也就相当于水管没有阀门，你伸手接水的时候，不管水到了没有，你就都只能耗在接水（流）上。
+				
+				nio的Channel的加入，相当于增加了水龙头（有阀门），虽然一个时刻也只能接一个水管的水，但依赖轮换策略，在水量不大的时候，各个水管里流出来的水，都可以得到妥善接纳，这个关键之处就是增加了一个接水工，也就是Selector，他负责协调，也就是看哪根水管有水了的话，在当前水管的水接到一定程度的时候，就切换一下：临时关上当前水龙头，试着打开另一个水龙头（看看有没有水）。
+				
+				当其他人需要用水的时候，不是直接去接水，而是事前提了一个水桶给接水工，这个水桶就是Buffer。也就是，其他人虽然也可能要等，但不会在现场等，而是回家等，可以做其它事去，水接满了，接水工会通知他们。
+				
+				这其实也是非常接近当前社会分工细化的现实，也是统分利用现有资源达到并发效果的一种很经济的手段，而不是动不动就来个并行处理，虽然那样是最简单的，但也是最浪费资源的方式。
+				
+		9/  oracle 数据库函数
+				
+				1. 名称 : sign(n) 变形： sign( a-b ) 0 , 1, -1
+				   函数说明 : 取数字n的符号,大于0返回1,小于0返回-1,等于0返回0
+				   用例 : select decode( sign(length(123)-4), 0 , 'equ' , 1, 'da' , -1, 'x' ) from dual;
+				   
+				2. 名称 : instr(str1 , str2)
+					 函数说明 ： 返回字符str2 在str1中的位置。
+					 用例 :select instr('wed:123' , ':') from dual;  //4
+					 
+				３．名称：REGEXP_SUBSTR(srcstr, pattern [, position [, occurrence [, match_option]]]) 
+						说明： 
+								srcstr 
+								源字符串 
+								
+								pattern 
+								正则表达式样式 
+								
+								position 
+								开始匹配字符位置 
+								
+								occurrence 
+								匹配出现次数 
+								
+								match_option 
+								匹配选项（区分大小写）
+						应用：
+							   --字符串的列传行 
+									SELECT regexp_substr('1101,Yokohama,Japan,1.5.105', '[^,]+', 1, LEVEL) AS output 
+									FROM dual 
+									CONNECT BY LEVEL <= length('1101,Yokohama,Japan,1.5.105') - 
+									length(REPLACE('1101,Yokohama,Japan,1.5.105', ',')) + 1; 
+									
+								---
+									SELECT REGEXP_SUBSTR('17,20,23', '[^,]+', 1, LEVEL, 'i') AS STR  
+									  FROM DUAL  
+									CONNECT BY LEVEL <=  
+									           LENGTH('17,20,23') - LENGTH(REGEXP_REPLACE('17,20,23', ',', ''))+1; 
+									
+				    其他类似：regexp_instr , regexp_like , regexp_replace 等等，具体百度。。
+				    
+				 4. 名称：wm_concat(column)
+				    函数说明：字段合并
+				    用例：
+				    SELECT wm_concat(REGEXP_SUBSTR('17,20,23', '[^,]+', 1, LEVEL, 'i')） AS STR  
+						  FROM DUAL  
+						CONNECT BY LEVEL <=  
+						           LENGTH('17,20,23') - LENGTH(REGEXP_REPLACE('17,20,23', ',', ''))+1; 
+						           
+					5. 名称：over() --需配合其他函数使用，可替代group by分组函数，效率更高
+						 说明：RANK ( ) OVER ( [query_partition_clause] order_by_clause ) 
+						 				DENSE_RANK ( ) OVER ( [query_partition_clause] order_by_clause ) 
+						 				可实现按指定的字段分组排序，对于相同分组字段的结果集进行排序, 其中PARTITION BY 为分组字段
+						 用例：
+						 			with t as (
+										select 2010 as a ,1 as b from dual
+										union
+										select 2011 as a ,2 as b from dual
+										union
+										select 2012 as a ,3 as b from dual
+									)
+									select　a , sum(b) over(order by a) from t
+									--select a, (select sum(b) from t t1 where t1.a <= t2.a) from t t2
