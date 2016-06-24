@@ -126,3 +126,17 @@
 				)
 				select　a , sum(b) over(order by a) from t
 				--select a, (select sum(b) from t t1 where t1.a <= t2.a) from t t2
+				
+			常用的分析函数如下所列:
+				row_number() over(partition by ... order by ...)
+				rank() over(partition by ... order by ...)
+				dense_rank() over(partition by ... order by ...)
+				count() over(partition by ... order by ...)
+				max() over(partition by ... order by ...)
+				min() over(partition by ... order by ...)
+				sum() over(partition by ... order by ...)
+				avg() over(partition by ... order by ...)
+				first_value() over(partition by ... order by ...)
+				last_value() over(partition by ... order by ...)
+				lag() over(partition by ... order by ...)
+				lead() over(partition by ... order by ...)
