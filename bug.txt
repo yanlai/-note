@@ -140,3 +140,11 @@
 				last_value() over(partition by ... order by ...)
 				lag() over(partition by ... order by ...)
 				lead() over(partition by ... order by ...)
+				
+		6. 判断中文乱码函数  ASCIISTR(string)
+			用法：转换为ASCII码，如果包含 '%\FFFD%'，表示乱码�，有时也有为null的情况
+			示例：ASCIISTR(char) like '%\FFFD%' or ASCIISTR(char) is null 
+		
+		7. 字符集转换函数  convert(char, dest_char_set [, source_char_set])，
+			用法：其中char表示要转换的字符串，dest_char_set表示要转换成的目的字符集，source_char_set是char的原本字符集，如果缺				省，则默认是数据库的字符集。
+			示例：convert(char ,'UTF8','ZHS16GBK')
