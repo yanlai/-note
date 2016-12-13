@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jquery实现多级下拉菜单-柯乐义</title>
+    <style>
+        /* navigation style */
+        .keleyi-com-nav{
+            height: 39px;
+            font: 12px Geneva, Arial, Helvetica, sans-serif;
+            border: 1px solid #2D2D2D;
+            border-radius: 3px;
+            min-width:500px;
+            margin-left: 0px;
+            padding-left: 0px;
+            background-color:  #2D2D2D;
+        }
+
+        .keleyi-com-nav li{
+            list-style: none;
+            display: block;
+            float: left;
+            height: 40px;
+            position: relative;
+            background: #2D2D2D;
+            border-right: 1px solid #323232;
+        }
+        .keleyi-com-nav li a{
+            padding: 0px 10px 0px 30px;
+            margin: 0px 0;
+            line-height: 40px;
+            text-decoration: none;
+            border-right: 1px solid #4a4848;
+            height: 40px;
+            color: #FFF;
+            text-shadow: 1px 1px 1px #66696B;
+        }
+        .keleyi-com-nav ul{
+            background: #f2f5f6;
+            padding: 0px;
+            border-bottom: 1px solid #DDDDDD;
+            border-right: 1px solid #DDDDDD;
+            border-left:1px solid #DDDDDD;
+            border-radius: 0px 0px 3px 3px;
+            box-shadow: 2px 2px 3px #ECECEC;
+            -webkit-box-shadow: 2px 2px 3px #ECECEC;
+            -moz-box-shadow:2px 2px 3px #ECECEC;
+            width:170px;
+        }
+        .keleyi-com-nav .site-name,#keleyi-com-nav .site-name:hover{
+            padding-left: 10px;
+            padding-right: 10px;
+            color: #FFF;
+            background: url(http://keleyi.com/keleyi/phtml/jqmenu/4/logo.png) no-repeat 10px 5px;
+            width: 160px;
+        }
+        .keleyi-com-nav .site-name a{
+            width: 129px;
+            overflow:hidden;
+        }
+
+             .keleyi-com-nav li a{
+            display: block;
+        }
+        .keleyi-com-nav ul li {
+            border-right:none;
+            /*border-bottom:1px solid #DDDDDD;*/
+            width:170px;
+            height:39px;
+        }
+        .keleyi-com-nav  li:hover{background: #FA1D1F;}
+        .keleyi-com-nav ul li:last-child { border-bottom: none;}
+        .keleyi-com-nav ul li:last-child a{ border-bottom: none;}
+        /* Sub menus */
+        .keleyi-com-nav ul{
+            display: none;
+            visibility:hidden;
+            position: absolute;
+            top: 40px;
+        }
+
+        /* Third-level menus */
+        .keleyi-com-nav ul ul{
+            top: 0px;
+            left:170px;
+            display: none;
+            visibility:hidden;
+          /*  border: 1px solid #DDDDDD;*/
+        }
+        /* Fourth-level menus */
+
+        .keleyi-com-nav ul li{
+            display: block;
+            visibility:visible;
+        }
+        .keleyi-com-nav li:hover > ul{
+            display: block;
+            visibility:visible;
+        }
+    </style>
+    <!--[if IE 7]>
+    <style>
+        #keleyi-com-nav{
+            margin-left:0px
+        }
+        #keleyi-com-nav ul{
+            left:-40px;
+        }
+        #keleyi-com-nav ul ul{
+            left:130px;
+        }
+        #keleyi-com-nav ul ul ul{
+            left:130px;
+        }
+    </style>
+    <![endif]-->
+    <script type="text/javascript" src="http://keleyi.com/keleyi/pmedia/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#kel"+"eyi-com-nav li").hover(
+                    function () {
+                        $(this).children('ul').hide();
+                        $(this).children('ul').slideDown('fast');
+                    },
+                    function () {
+                        $('ul', this).slideUp('fast');
+                    });
+        });
+    </script>
+</head>
+<body>
+<ul class="keleyi-com-nav">
+    <li><a href="">首页</a>
+        <ul>
+            <li><a>导航菜单二级分类 »</a>
+                <ul>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">1 »</a></li>
+                </ul>
+            </li>
+            <li><a href="#">1</a>
+                 <ul>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">2»</a></li>
+                </ul>
+            </li>
+            <li><a href="#">2</a>
+                 <ul>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">3 »</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><a href="">运发报表</a>
+        <ul>
+            <li><a>运发报表（口报）</a></li>
+            <li><a href="#">运发报表（月报）</a></li>
+            <li><a href="#"> 运发报表（年报）</a></li>
+            <li><a href="#"> 运发报表（历史）</a></li>
+            <li><a href="#"> 共享及起租情况</a></li>
+            <li><a href="#"> 服务周报</a></li>
+            <li><a href="#"> 服务月报</a></li>
+            <li><a href="#">详情导出</a></li>
+            <li><a href="#"> 服务周报</a></li>
+            <li><a href="#">对标分析</a></li>
+            <li><a href="#"> 过程管控指标</a></li>
+            <li><a href="#">运发结转报表</a></li>
+            <li><a href="#"> 造价分析</a></li>
+        </ul>
+    </li>
+    <li><a href="">运发报表</a>
+        <ul>
+            <li><a>业务生产监控</a>
+                <ul>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">1 »</a></li>
+                </ul>
+            </li>
+            <li><a href="#">运营商务服务</a>
+                <ul>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">2»</a></li>
+                </ul>
+            </li>
+            <li><a href="#">业务操作管控</a>
+                <ul>
+                    <li><a href="#">过程管控指标</a></li>
+                    <li><a href="#">运发结转报表</a></li>
+                    <li><a href="#">造价分析报表</a></li>
+                </ul>
+            </li>
+            <li><a href="#">报表辅助功能</a>
+                <ul>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">3 »</a></li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>
