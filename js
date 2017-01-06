@@ -46,3 +46,9 @@ jQuery.download = function(url, data, method) {
 						+ '</form>').appendTo('body').submit().remove();
 	}
 };
+
+
+//js数字千分位格式化（正则表达式版）
+function toThousands(num) {
+    return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+}
