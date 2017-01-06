@@ -53,7 +53,7 @@ function toThousands(num) {
     return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
 }
 
-//同一ajax请求，只处理最后一次请求
+//防止重复发送Ajax请求的解决方案
 var pendingRequests = {};
   jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
    var key = options.url;
