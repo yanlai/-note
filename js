@@ -52,3 +52,24 @@ jQuery.download = function(url, data, method) {
 function toThousands(num) {
     return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
 }
+
+//同一ajax请求，只处理最后一次请求
+var pendingRequests = {};
+  jQuery.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
+   var key = options.url;
+/*   console.log(key);*/
+   if (!pendingRequests[key]) {
+    pendingRequests[key] = jqXHR;
+   }else{
+    //jqXHR.abort(); //放弃后触发的提交
+    pendingRequests[key].abort(); // 放弃先触发的提交
+   }
+ 
+   var complete = options.complete;
+   options.complete = function(jqXHR, textStatus) {
+    pendingRequests[key] = null;
+    if (jQuery.isFunction(complete)) {
+    complete.apply(this, arguments);
+    }
+   };
+  });
