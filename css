@@ -1,4 +1,4 @@
-遮罩
+1/遮罩
 div{
    position: fixed;
    top: 0px;
@@ -11,3 +11,6 @@ div{
    z-index:1001;
    filter: alpha(opacity=40);
 }
+
+2/页面滚动到指定div
+function mScroll(id){$("html,body").stop(true);$("html,body").animate({scrollTop: $("#"+id).offset().top}, 1000);}  
